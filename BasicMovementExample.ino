@@ -64,9 +64,7 @@ Stepper leftStepper(stepsPerRevolution, 8, 10, 9, 11);
 Stepper rightStepper(stepsPerRevolution, 4, 6, 5, 7);
 
 
-
-
-int callFunc;     
+    
 int stepsToDo;  //variable to be flexible in the loop (e.g. depending on the distance to obstacles)
 
 
@@ -74,7 +72,7 @@ int stepsToDo;  //variable to be flexible in the loop (e.g. depending on the dis
 // define functions for basic movement
 // using 'for' to move steppers (pseudo)simultaniously    
     
-    int goForward(int x){              
+    void goForward(int x){              
            for(int s=0; s<x; s++){
              leftStepper.step(1);
              rightStepper.step(-1);
@@ -82,7 +80,7 @@ int stepsToDo;  //variable to be flexible in the loop (e.g. depending on the dis
     }
         
     
-    int goBack(int x){              
+    void goBack(int x){              
            for(int s=0; s<x; s++){
              leftStepper.step(-1);
              rightStepper.step(1);
@@ -91,14 +89,14 @@ int stepsToDo;  //variable to be flexible in the loop (e.g. depending on the dis
 
 
 //turning left and right standing at the same place - with both motors
-  int turnLeft(int x){              
+  void turnLeft(int x){              
            for(int s=0; s<x; s++){
              leftStepper.step(-1);
              rightStepper.step(-1);
              }       
     }
     
-    int turnRight(int x){              
+    void turnRight(int x){              
            for(int s=0; s<x; s++){
              leftStepper.step(1);
              rightStepper.step(1);
@@ -113,31 +111,25 @@ void setup()
   // set the speed at 15 rpm:
   rightStepper.setSpeed(15);
   leftStepper.setSpeed(15);
-  
-  
-    
-
-
 }
+
+
 
 void loop() 
 {
- 
   
   stepsToDo = 2048;  // steps for a complete revolution
    
-  callFunc = goForward(stepsToDo);
-    
-  callFunc = goBack(stepsToDo);  
+  goForward(stepsToDo);
+  goBack(stepsToDo);  
     
   delay(500);
     
     
-   stepsToDo = 512;    // 1/4 of a complete = turning 45 degrees
-   
-  callFunc = turnLeft(stepsToDo);
-    
-  callFunc = turnRight(stepsToDo);  
+  stepsToDo = 512;    // 1/4 of a complete = turning 45 degrees
+
+  turnLeft(stepsToDo);
+  turnRight(stepsToDo);  
     
   delay(500);
     
